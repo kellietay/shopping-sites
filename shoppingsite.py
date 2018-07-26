@@ -108,10 +108,10 @@ def add_to_cart(melon_id):
         session['cart'] = {}
     
     session['cart'][melon_id] = session['cart'].get(melon_id,0) + 1
-    
 
 
-    return "Oops! This needs to be implemented!"
+
+    return redirect("/cart")
 
 
 @app.route("/login", methods=["GET"])
