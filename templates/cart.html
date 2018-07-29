@@ -2,8 +2,9 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
-    <table class="table table-striped">
+    
+    {% if cart is defined and cart|length > 0 %}
+        <table class="table table-striped">
         <thead>
         <tr>
             <th>Melon Name</th>
@@ -13,7 +14,29 @@
         </tr>
         </thead>
         <tbody>
+        {% for melons in cart %}
         <tr>
+            <td>{{melons.common_name}}</td>
+            <td>{{melons.quantity}}</td>
+            <td>${{'%0.2f' % melons.price}}</td>
+            <td>${{'%0.2f' % melons.totalprice}}</td>
+        </tr>
+        {% endfor %}
+        
+        </tbody>
+        </table>
+
+        <h3>${{ ordertotal }}</h3>
+
+        <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
+
+
+    {% else %}
+
+        <p>You have no items in your cart<p>
+      <a href="/" class="btn btn-large btn-primary">Shop Now</a>
+    {% endif %}
+<!--         <tr>
             <td>Ancient Watermelon</td>
             <td>5</td>
             <td>$3.00</td>
@@ -36,12 +59,8 @@
             <td>2</td>
             <td>$3.00</td>
             <td>$6.00</td>
-        </tr>
-        </tbody>
-    </table>
+        </tr> -->
 
-    <h3>Total: $27.00</h3>
 
-    <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
 
 {% endblock %}
